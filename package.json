@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "todo-list",
   "main": "y",
+  "type": "module",
   "scripts": {
     "start": "node index",
     "dev": "nodemon index"
@@ -10,6 +11,7 @@
   "author": "tamim",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "mongoose": "^8.15.1"
   }
 }
