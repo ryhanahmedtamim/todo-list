@@ -1,12 +1,13 @@
-import { connect } from "mongoose";
 import express, { request, response } from 'express';
 import { addTodoItem, getTodoItem, updatTodoItem, getAllTodoItem } from "./controller/todoController.js";
+import { connectDB } from './db/connection.js';
 
 
 const app = new express();
 app.use(express.json());
 app.listen(3000);
 
+connectDB();
 app.get("/", (request, response) => {
     const serviceStatus = {
         status : "running"

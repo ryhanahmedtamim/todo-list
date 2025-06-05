@@ -1,39 +1,28 @@
-import { request, response } from "express";
+import { TodoItem } from "../models/todoItemModels.js";
+
 
 export const addTodoItem = async (req, res) => {
-    let response = {
-        message: "success"
-    };
+    const requstBody = req.body;
+    const todoItem = new TodoItem(requstBody);
+    const response = await todoItem.save();
     res.status(201).send(response);
 };
 
 export const getTodoItem = async (request, response) => {
     const id = request.params.id;
-    let todoItem = {
-        "id" : id,
-        details : "test details",
-        userId: "dljflajedlkj",
-        date : new Date()
-    };
-
+    const todoItem = await TodoItem.findById(id);
     response.send(todoItem);
 }
 
 export const getAllTodoItem = async (request, response) => {
-    let todoItems = []
-    todoItems.push({});
-    todoItems.push({});
-    response.send(todoItems)
+    const responseList = await TodoItem.find();
+    response.send(responseList);
 }
 
 export const updatTodoItem = async (request, response) => {
     const itemId = request.params.id;
-    // todo : add update code here
-    let todoItem = {
-        id : itemId,
-        details : "test details",
-        userId: "dljflajedlkj",
-        date : new Date().toLocaleString()
-    };
+    const todoItem = await TodoItem.findByIdAndUpdate(itemId, request.body, {
+        new : "ture"
+    });
     response.send(todoItem);
 }
